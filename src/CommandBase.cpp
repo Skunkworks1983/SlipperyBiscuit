@@ -5,6 +5,7 @@
 // Initialize a single static instance of all of your subsystems to NULL
 DriveBase* CommandBase::drivebase = NULL;
 OI* CommandBase::oi = NULL;
+Pneumatics *CommandBase::pneumatics = NULL;
 
 CommandBase::CommandBase(char const *name) :
 		Command(name)
@@ -22,6 +23,6 @@ void CommandBase::init()
 	// Create a single static instance of all of your subsystems. The following
 	// line should be repeated for each subsystem in the project.
 	drivebase = new DriveBase();
-
+	pneumatics = new Pneumatics();
 	oi = new OI();
 }
