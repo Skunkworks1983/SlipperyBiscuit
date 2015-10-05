@@ -15,6 +15,7 @@ private:
 	void registerListeners();
 public:
 	OI();
+	~OI();
 	double getLeftStickY();
 	double getRightStickY();
 };

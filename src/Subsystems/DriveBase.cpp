@@ -19,6 +19,20 @@ DriveBase::DriveBase() :
 	backRightOmni = new Solenoid(BACK_RIGHT_OMNI_PORT);
 }
 
+DriveBase::~DriveBase(){
+	delete leftMotor1;
+	delete leftMotor2;
+	delete leftMotor3;
+	delete rightMotor1;
+	delete rightMotor2;
+	delete rightMotor3;
+
+	delete frontLeftOmni;
+	delete frontRightOmni;
+	delete backLeftOmni;
+	delete backRightOmni;
+}
+
 void DriveBase::InitDefaultCommand() {
 	SetDefaultCommand(new TankDrive());
 }

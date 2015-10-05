@@ -23,6 +23,22 @@ OI::OI() {
 	registerListeners();
 }
 
+OI::~OI() {
+	delete leftStick;
+	delete rightStick;
+
+	delete engageOmniWheelsOn;
+	delete engageOmniWheelsOff;
+
+	delete toggleFrontLeft;
+	delete toggleFrontRight;
+	delete toggleBackLeft;
+	delete toggleBackRight;
+
+	delete toggleAll;
+	delete holdEngage;
+}
+
 void OI::registerListeners() {
 	holdEngage->WhenPressed(new EngageOmniWheels(true));
 	holdEngage->WhenReleased(new EngageOmniWheels(false));

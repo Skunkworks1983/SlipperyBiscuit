@@ -11,6 +11,7 @@ private:
 	Solenoid *frontLeftOmni, *frontRightOmni, *backLeftOmni, *backRightOmni;
 public:
 	DriveBase();
+	~DriveBase();
 	void setLeftSpeed(double speed);
 	void setRightSpeed(double speed);
 	void InitDefaultCommand();
