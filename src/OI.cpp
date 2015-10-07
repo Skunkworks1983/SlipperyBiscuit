@@ -15,10 +15,8 @@ OI::OI() {
 	engageOmniWheelsOff = new JoystickButton(leftStick, 1);
 	engageOmniWheelsOn = new JoystickButton(leftStick, 2);
 
-	toggleFrontLeft = new JoystickButton(rightStick, 0);
-	toggleFrontRight = new JoystickButton(rightStick, 1);
-	toggleBackLeft = new JoystickButton(rightStick, 2);
-	toggleBackRight = new JoystickButton(rightStick, 3);
+	toggleFront = new JoystickButton(rightStick, 0);
+	toggleFront = new JoystickButton(rightStick, 1);
 
 	toggleAll = new JoystickButton(leftStick, 3);
 
@@ -35,10 +33,8 @@ OI::~OI() {
 	delete engageOmniWheelsOn;
 	delete engageOmniWheelsOff;
 
-	delete toggleFrontLeft;
-	delete toggleFrontRight;
-	delete toggleBackLeft;
-	delete toggleBackRight;
+	delete toggleFront;
+	delete toggleBack;
 
 	delete toggleAll;
 	delete holdEngage;
@@ -51,10 +47,8 @@ void OI::registerListeners() {
 	engageOmniWheelsOff->WhenPressed(new EngageOmniWheels(false));
 	engageOmniWheelsOn->WhenPressed(new EngageOmniWheels(true));
 
-	toggleFrontLeft->WhenPressed(new ToggleOmniWheels(FRONT_LEFT_OMNI_ID));
-	toggleFrontRight->WhenPressed(new ToggleOmniWheels(FRONT_RIGHT_OMNI_ID));
-	toggleBackLeft->WhenPressed(new ToggleOmniWheels(BACK_LEFT_OMNI_ID));
-	toggleBackRight->WhenPressed(new ToggleOmniWheels(BACK_RIGHT_OMNI_ID));
+	toggleFront->WhenPressed(new ToggleOmniWheels(true, false));
+	toggleFront->WhenPressed(new ToggleOmniWheels(false, true));
 
 	shiftUp->WhenPressed(new ShiftDrivebase(true));
 	shiftDown->WhenPressed(new ShiftDrivebase(false));
@@ -63,9 +57,9 @@ void OI::registerListeners() {
 }
 
 double OI::getLeftStickY() {
-	return leftStick->GetY();
+	return leftStick->GetY()*fabs(leftStick->GetY());
 }
 
 double OI::getRightStickY() {
-	return rightStick->GetY();
+	return rightStick->GetY()*fabs(rightStick->GetY());
 }

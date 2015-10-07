@@ -9,21 +9,16 @@
 #include <Commands/EngageOmniWheels.h>
 #include <Subsystems/DriveBase.h>
 
-EngageOmniWheels::EngageOmniWheels(bool front_left, bool front_right,
-		bool back_left, bool back_right) {
+EngageOmniWheels::EngageOmniWheels(bool front, bool back) {
 	Requires(CommandBase::drivebase);
-	this->front_left = front_left;
-	this->front_right = front_right;
-	this->back_left = back_left;
-	this->back_right = back_right;
+	this->front = front;
+	this->back = back;
 }
 
 EngageOmniWheels::EngageOmniWheels(bool on) {
 	Requires(CommandBase::drivebase);
-	front_left = on;
-	front_right = on;
-	back_left = on;
-	back_right = on;
+	back = on;
+	front = on;
 }
 
 EngageOmniWheels::~EngageOmniWheels() {
@@ -32,10 +27,8 @@ EngageOmniWheels::~EngageOmniWheels() {
 
 void EngageOmniWheels::Initialize() {
 	DriveBase *d = CommandBase::drivebase;
-	d->engageSolenoid(FRONT_LEFT_OMNI_ID, front_left);
-	d->engageSolenoid(FRONT_RIGHT_OMNI_ID, front_right);
-	d->engageSolenoid(BACK_LEFT_OMNI_ID, back_left);
-	d->engageSolenoid(BACK_RIGHT_OMNI_ID, back_right);
+	d->engageSolenoid(FRONT_OMNI_ID, front);
+	d->engageSolenoid(BACK_OMNI_ID, back);
 }
 
 void EngageOmniWheels::Execute() {

@@ -7,8 +7,7 @@ class OI {
 private:
 	Joystick *leftStick, *rightStick;
 	JoystickButton *engageOmniWheelsOn, *engageOmniWheelsOff;
-	JoystickButton *toggleFrontLeft,
-			*toggleFrontRight, *toggleBackLeft, *toggleBackRight, *toggleAll;
+	JoystickButton *toggleFront, *toggleBack, *toggleAll;
 	JoystickButton *shiftUp, *shiftDown;
 	JoystickButton *holdEngage;
 

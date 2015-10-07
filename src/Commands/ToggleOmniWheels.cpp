@@ -9,40 +9,16 @@
 #include <Commands/ToggleOmniWheels.h>
 #include <Subsystems/DriveBase.h>
 
-ToggleOmniWheels::ToggleOmniWheels(bool front_left, bool front_right,
-		bool back_left, bool back_right) {
+ToggleOmniWheels::ToggleOmniWheels(bool front, bool back) {
 	Requires(CommandBase::drivebase);
-	this->front_left = front_left;
-	this->front_right = front_right;
-	this->back_left = back_left;
-	this->back_right = back_right;
-
-}
-
-ToggleOmniWheels::ToggleOmniWheels(int id) {
-	Requires(CommandBase::drivebase);
-	switch (id) {
-	case FRONT_LEFT_OMNI_ID:
-		front_left = true;
-		break;
-	case FRONT_RIGHT_OMNI_ID:
-		front_right = true;
-		break;
-	case BACK_LEFT_OMNI_ID:
-		back_left = true;
-		break;
-	case BACK_RIGHT_OMNI_ID:
-		back_right = true;
-		break;
-	}
+	this->front = front;
+	this->back = back;
 }
 
 ToggleOmniWheels::ToggleOmniWheels() {
 	Requires(CommandBase::drivebase);
-	front_left = true;
-	front_right = true;
-	back_left = true;
-	back_right = true;
+	front = true;
+	back = true;
 }
 
 ToggleOmniWheels::~ToggleOmniWheels() {
@@ -51,17 +27,11 @@ ToggleOmniWheels::~ToggleOmniWheels() {
 
 void ToggleOmniWheels::Initialize() {
 	DriveBase *d = CommandBase::drivebase;
-	if (front_left) {
-		d->toggleSolenoid(FRONT_LEFT_OMNI_ID);
+	if (front) {
+		d->toggleSolenoid(FRONT_OMNI_ID);
 	}
-	if (front_right) {
-		d->toggleSolenoid(FRONT_RIGHT_OMNI_ID);
-	}
-	if (back_left) {
-		d->toggleSolenoid(BACK_LEFT_OMNI_ID);
-	}
-	if (back_right) {
-		d->toggleSolenoid(BACK_RIGHT_OMNI_ID);
+	if (back) {
+		d->toggleSolenoid(BACK_OMNI_ID);
 	}
 }
 

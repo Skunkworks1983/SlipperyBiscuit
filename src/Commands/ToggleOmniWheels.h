@@ -13,11 +13,11 @@
 
 class ToggleOmniWheels: public Command {
 private:
-	bool front_left, front_right, back_left, back_right;
+	bool front, back;
+	//fsdfd
 public:
-	ToggleOmniWheels();	//TODO: fix ambiguous error with this constructor
-	ToggleOmniWheels(int id);
-	ToggleOmniWheels(bool front_left, bool front_right, bool back_left, bool back_right);
+	ToggleOmniWheels();
+	ToggleOmniWheels(bool front, bool back);
 	virtual ~ToggleOmniWheels();
 	void Initialize();
 	void Execute();

@@ -13,10 +13,9 @@
 
 class EngageOmniWheels: public Command {
 private:
-	bool front_left, front_right, back_left, back_right;
+	bool front, back;
 public:
-	EngageOmniWheels(bool front_left, bool front_right, bool back_left,
-			bool back_right);
+	EngageOmniWheels(bool front, bool back);
 	EngageOmniWheels(bool on);
 	virtual ~EngageOmniWheels();
 	void Initialize();
