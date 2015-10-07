@@ -8,13 +8,11 @@
 class Robot: public IterativeRobot
 {
 private:
-	Command *autonomousCommand;
 	LiveWindow *lw;
 
 	void RobotInit()
 	{
 		CommandBase::init();
-		autonomousCommand = new TankDrive();
 		lw = LiveWindow::GetInstance();
 	}
 	
@@ -25,8 +23,7 @@ private:
 
 	void AutonomousInit()
 	{
-		if (autonomousCommand != NULL)
-			autonomousCommand->Start();
+
 	}
 
 	void AutonomousPeriodic()
@@ -40,8 +37,7 @@ private:
 		// teleop starts running. If you want the autonomous to 
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != NULL)
-			autonomousCommand->Cancel();
+
 	}
 
 	void TeleopPeriodic()

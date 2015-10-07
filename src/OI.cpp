@@ -1,8 +1,10 @@
 #include <Buttons/JoystickButton.h>
 #include <Commands/EngageOmniWheels.h>
 #include <Commands/ToggleOmniWheels.h>
+#include <Commands/ShiftDriveBase.h>
 #include <Joystick.h>
 #include <OI.h>
+#include <cstring>
 
 OI::OI() {
 	leftStick = new Joystick(OI_JOYSTICK_LEFT_PORT);
@@ -20,7 +22,26 @@ OI::OI() {
 
 	toggleAll = new JoystickButton(leftStick, 3);
 
+	shiftUp = new JoystickButton(leftStick, 3);
+	shiftDown = new JoystickButton(leftStick, 4);
+
 	registerListeners();
+}
+
+OI::~OI() {
+	delete leftStick;
+	delete rightStick;
+
+	delete engageOmniWheelsOn;
+	delete engageOmniWheelsOff;
+
+	delete toggleFrontLeft;
+	delete toggleFrontRight;
+	delete toggleBackLeft;
+	delete toggleBackRight;
+
+	delete toggleAll;
+	delete holdEngage;
 }
 
 void OI::registerListeners() {
@@ -35,9 +56,10 @@ void OI::registerListeners() {
 	toggleBackLeft->WhenPressed(new ToggleOmniWheels(BACK_LEFT_OMNI_ID));
 	toggleBackRight->WhenPressed(new ToggleOmniWheels(BACK_RIGHT_OMNI_ID));
 
-	int *a = new int[4];
-	memset(a, -1, 4);
-	toggleAll->WhenPressed(new ToggleOmniWheels(a)); //TODO: fix(using ToggleOmniWheels() with no argument gives an "is ambiguous" error)
+	shiftUp->WhenPressed(new ShiftDrivebase(true));
+	shiftDown->WhenPressed(new ShiftDrivebase(false));
+
+	toggleAll->WhenPressed(new ToggleOmniWheels());
 }
 
 double OI::getLeftStickY() {

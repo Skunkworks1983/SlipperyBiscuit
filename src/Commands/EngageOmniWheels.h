@@ -13,11 +13,10 @@
 
 class EngageOmniWheels: public Command {
 private:
-	bool on;
-	int ids[DRIVEBASE_NUMBER_OMNI];
+	bool front_left, front_right, back_left, back_right;
 public:
-	EngageOmniWheels(int ids[DRIVEBASE_NUMBER_OMNI], bool on);
-	EngageOmniWheels(int id, bool on);
+	EngageOmniWheels(bool front_left, bool front_right, bool back_left,
+			bool back_right);
 	EngageOmniWheels(bool on);
 	virtual ~EngageOmniWheels();
 	void Initialize();
