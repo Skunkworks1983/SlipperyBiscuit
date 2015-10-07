@@ -9,23 +9,21 @@
 #include <Commands/EngageOmniWheels.h>
 #include <Subsystems/DriveBase.h>
 
-EngageOmniWheels::EngageOmniWheels(int ids[DRIVEBASE_NUMBER_OMNI], bool on) {
+EngageOmniWheels::EngageOmniWheels(bool front_left, bool front_right,
+		bool back_left, bool back_right) {
 	Requires(CommandBase::drivebase);
-	this->on = on;
-	memcpy(ids, this->ids, sizeof(this->ids));
-}
-
-EngageOmniWheels::EngageOmniWheels(int id, bool on) {
-	Requires(CommandBase::drivebase);
-	this->on = on;
-	memset(this->ids, -1, DRIVEBASE_NUMBER_OMNI);// so that id 0 isn't called multiple times (should only affect toggle)
-	ids[0] = id;
+	this->front_left = front_left;
+	this->front_right = front_right;
+	this->back_left = back_left;
+	this->back_right = back_right;
 }
 
 EngageOmniWheels::EngageOmniWheels(bool on) {
 	Requires(CommandBase::drivebase);
-	this->on = on;
-	memset(this->ids, -1, DRIVEBASE_NUMBER_OMNI);
+	front_left = on;
+	front_right = on;
+	back_left = on;
+	back_right = on;
 }
 
 EngageOmniWheels::~EngageOmniWheels() {
@@ -33,16 +31,11 @@ EngageOmniWheels::~EngageOmniWheels() {
 }
 
 void EngageOmniWheels::Initialize() {
-	bool none_specified = true;
-	for (int i = 0; i < DRIVEBASE_NUMBER_OMNI; i++) {
-		if (ids[i] != -1) {
-			CommandBase::drivebase->engageSolenoids(this->on);
-			none_specified = false;
-		}
-	}
-	if (none_specified) {
-		CommandBase::drivebase->engageSolenoids(this->on);
-	}
+	DriveBase *d = CommandBase::drivebase;
+	d->engageSolenoid(FRONT_LEFT_OMNI_ID, front_left);
+	d->engageSolenoid(FRONT_RIGHT_OMNI_ID, front_right);
+	d->engageSolenoid(BACK_LEFT_OMNI_ID, back_left);
+	d->engageSolenoid(BACK_RIGHT_OMNI_ID, back_right);
 }
 
 void EngageOmniWheels::Execute() {

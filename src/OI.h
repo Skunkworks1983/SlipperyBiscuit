@@ -9,7 +9,7 @@ private:
 	JoystickButton *engageOmniWheelsOn, *engageOmniWheelsOff;
 	JoystickButton *toggleFrontLeft,
 			*toggleFrontRight, *toggleBackLeft, *toggleBackRight, *toggleAll;
-
+	JoystickButton *shiftUp, *shiftDown;
 	JoystickButton *holdEngage;
 
 	void registerListeners();

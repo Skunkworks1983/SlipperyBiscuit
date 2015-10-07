@@ -17,9 +17,12 @@ DriveBase::DriveBase() :
 	frontRightOmni = new Solenoid(FRONT_RIGHT_OMNI_PORT);
 	backLeftOmni = new Solenoid(BACK_LEFT_OMNI_PORT);
 	backRightOmni = new Solenoid(BACK_RIGHT_OMNI_PORT);
+
+	shifterLeft = new Solenoid(SHIFTER_LEFT_PORT);
+	shifterRight = new Solenoid(SHIFTER_RIGHT_PORT);
 }
 
-DriveBase::~DriveBase(){
+DriveBase::~DriveBase() {
 	delete leftMotor1;
 	delete leftMotor2;
 	delete leftMotor3;
@@ -31,6 +34,11 @@ DriveBase::~DriveBase(){
 	delete frontRightOmni;
 	delete backLeftOmni;
 	delete backRightOmni;
+}
+
+void DriveBase::shift(bool high) {
+	shifterLeft->Set(high);
+	shifterRight->Set(high);
 }
 
 void DriveBase::InitDefaultCommand() {

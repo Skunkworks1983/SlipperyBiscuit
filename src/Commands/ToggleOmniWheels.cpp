@@ -5,24 +5,44 @@
  *      Author: s-4020395
  */
 
-#include <Commands/ToggleOmniWheels.h>
 #include <CommandBase.h>
+#include <Commands/ToggleOmniWheels.h>
 #include <Subsystems/DriveBase.h>
 
-ToggleOmniWheels::ToggleOmniWheels(int ids[DRIVEBASE_NUMBER_OMNI]){
+ToggleOmniWheels::ToggleOmniWheels(bool front_left, bool front_right,
+		bool back_left, bool back_right) {
 	Requires(CommandBase::drivebase);
-	memcpy(ids, this->ids, sizeof(this->ids));
+	this->front_left = front_left;
+	this->front_right = front_right;
+	this->back_left = back_left;
+	this->back_right = back_right;
+
 }
 
 ToggleOmniWheels::ToggleOmniWheels(int id) {
 	Requires(CommandBase::drivebase);
-	memset(this->ids, -1, DRIVEBASE_NUMBER_OMNI);// so that id 0 isn't called multiple times (should only affect toggle)
-	ids[0] = id;
+	switch (id) {
+	case FRONT_LEFT_OMNI_ID:
+		front_left = true;
+		break;
+	case FRONT_RIGHT_OMNI_ID:
+		front_right = true;
+		break;
+	case BACK_LEFT_OMNI_ID:
+		back_left = true;
+		break;
+	case BACK_RIGHT_OMNI_ID:
+		back_right = true;
+		break;
+	}
 }
 
-ToggleOmniWheels::ToggleOmniWheels(){
+ToggleOmniWheels::ToggleOmniWheels() {
 	Requires(CommandBase::drivebase);
-	memset(this->ids, -1, DRIVEBASE_NUMBER_OMNI);
+	front_left = true;
+	front_right = true;
+	back_left = true;
+	back_right = true;
 }
 
 ToggleOmniWheels::~ToggleOmniWheels() {
@@ -30,15 +50,18 @@ ToggleOmniWheels::~ToggleOmniWheels() {
 }
 
 void ToggleOmniWheels::Initialize() {
-	bool none_specified = true;
-	for (int i = 0; i < DRIVEBASE_NUMBER_OMNI; i++) {
-		if (ids[i] != -1) {
-			CommandBase::drivebase->toggleSolenoid(ids[i]);
-			none_specified = false;
-		}
+	DriveBase *d = CommandBase::drivebase;
+	if (front_left) {
+		d->toggleSolenoid(FRONT_LEFT_OMNI_ID);
 	}
-	if (none_specified) {
-		CommandBase::drivebase->toggleSolenoids();
+	if (front_right) {
+		d->toggleSolenoid(FRONT_RIGHT_OMNI_ID);
+	}
+	if (back_left) {
+		d->toggleSolenoid(BACK_LEFT_OMNI_ID);
+	}
+	if (back_right) {
+		d->toggleSolenoid(BACK_RIGHT_OMNI_ID);
 	}
 }
 
