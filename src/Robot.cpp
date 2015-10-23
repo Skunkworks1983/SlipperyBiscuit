@@ -4,6 +4,7 @@
 #include <LiveWindow/LiveWindow.h>
 #include <RobotBase.h>
 #include <stddef.h>
+#include "Commands/Autonomous/Autonomous.h"
 
 class Robot: public IterativeRobot
 {
@@ -23,7 +24,7 @@ private:
 
 	void AutonomousInit()
 	{
-
+		Autonomous::createMikeAutonomous()->Start();
 	}
 
 	void AutonomousPeriodic()
