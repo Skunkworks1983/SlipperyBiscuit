@@ -57,9 +57,9 @@ void OI::registerListeners() {
 }
 
 double OI::getLeftStickY() {
-	return leftStick->GetY()*fabs(leftStick->GetY());
+	return leftStick->GetY() * fabs(leftStick->GetY());
 }
 
 double OI::getRightStickY() {
-	return rightStick->GetY()*fabs(rightStick->GetY());
+	return rightStick->GetY() * fabs(rightStick->GetY());
 }
