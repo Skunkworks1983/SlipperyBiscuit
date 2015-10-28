@@ -21,7 +21,7 @@ Turn::~Turn() {
 
 void Turn::Initialize() {
 	drivebase->resetEncoders();
-	drivebase->setLeftSpeed(speed * 0.5);
+	drivebase->setLeftSpeed(speed * -1);
 	drivebase->setRightSpeed(speed);
 }
 
@@ -30,8 +30,8 @@ void Turn::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Turn::IsFinished() {
-	return drivebase->getLeftDistance() >= distance
-			&& drivebase->getRightDistance() >= distance * 0.5;
+	return drivebase->getLeftDistance() <= distance * -1
+			&& drivebase->getRightDistance() >= distance;
 }
 
 // Called once after isFinished returns true
