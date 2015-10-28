@@ -20,6 +20,9 @@ DriveBase::DriveBase() :
 
 	shifterLeft = new Solenoid(SHIFTER_LEFT_PORT);
 	shifterRight = new Solenoid(SHIFTER_RIGHT_PORT);
+
+	leftEncoder = new Encoder(DRIVEBASE_LEFT_ENCODER_PORTS);
+	rightEncoder = new Encoder(DRIVEBASE_RIGHT_ENCODER_PORTS);
 }
 
 DriveBase::~DriveBase() {
@@ -75,8 +78,9 @@ void DriveBase::toggleSolenoid(int id) {
 						DoubleSolenoid::kReverse : DoubleSolenoid::kForward);
 		break;
 	case BACK_OMNI_ID:
-		backOmni->Set(backOmni->Get() == DoubleSolenoid::kForward ?
-				DoubleSolenoid::kReverse : DoubleSolenoid::kForward);
+		backOmni->Set(
+				backOmni->Get() == DoubleSolenoid::kForward ?
+						DoubleSolenoid::kReverse : DoubleSolenoid::kForward);
 		break;
 	}
 }
@@ -90,4 +94,18 @@ void DriveBase::toggleSolenoids() {
 	toggleSolenoid(FRONT_OMNI_ID);
 	toggleSolenoid(BACK_OMNI_ID);
 }
+
+float DriveBase::getLeftDistance() {
+	return leftEncoder->GetDistance();
+}
+
+float DriveBase::getRightDistance() {
+	return rightEncoder->GetDistance();
+}
+
+void DriveBase::resetEncoders(){
+	leftEncoder->Reset();
+	rightEncoder->Reset();
+}
+
 

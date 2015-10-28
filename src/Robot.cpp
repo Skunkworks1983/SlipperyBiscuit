@@ -1,9 +1,9 @@
+#include <CommandBase.h>
+#include <Commands/Autonomous/Autonomous.h>
 #include <Commands/Scheduler.h>
-#include <Commands/TankDrive.h>
 #include <IterativeRobot.h>
 #include <LiveWindow/LiveWindow.h>
 #include <RobotBase.h>
-#include <stddef.h>
 
 class Robot: public IterativeRobot
 {
@@ -23,7 +23,7 @@ private:
 
 	void AutonomousInit()
 	{
-
+		//Autonomous::createRossAutonomous()->Start();
 	}
 
 	void AutonomousPeriodic()
@@ -33,11 +33,11 @@ private:
 
 	void TeleopInit()
 	{
+		Scheduler::GetInstance()->RemoveAll();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to 
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-
 	}
 
 	void TeleopPeriodic()
