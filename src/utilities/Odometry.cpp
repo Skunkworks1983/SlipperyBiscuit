@@ -27,7 +27,7 @@ Vector *Odometry::getCurrentVelocity() {
 }
 
 void Odometry::update(double _currentTimeMs, double encoderDistanceLeft,
-		double encoderDistanceRight) {	//possibly need to pass in current velocity instead of encoderDistance
+		double encoderDistanceRight) {	//possibly need to pass in current velocity instead of encoderDistance with other modifications
 	this->currentTimeMs = _currentTimeMs;
 
 	double dLeft = encoderDistanceLeft - lastEncoderLeft; //could reset encoder instead each time at end, not sure if total encoder ticks are useful ornot
@@ -38,7 +38,7 @@ void Odometry::update(double _currentTimeMs, double encoderDistanceLeft,
 
 	double dTheta = ((angleLeft - angleRight) / (axle_length)) / 2;	//get radians by dividing difference of radians by total radians
 
-	double dTranslation = dLeft + dRight;
+	double dTranslation = (dLeft + dRight) / 2;
 
 	if (currentVelocity != NULL) {
 		currentVelocity->setMagnitude(dTranslation / (currentTimeMs - lastTimeMs));
@@ -56,4 +56,5 @@ void Odometry::update(double _currentTimeMs, double encoderDistanceLeft,
 	} else {
 		currentPosition = new Vector(dTranslation, dTheta);
 	}
+	lastTimeMs = currentTimeMs;
 }

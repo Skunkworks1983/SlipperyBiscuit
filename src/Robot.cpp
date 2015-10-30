@@ -23,7 +23,7 @@ private:
 
 	void AutonomousInit()
 	{
-
+		Scheduler::GetInstance()->RemoveAll();
 	}
 
 	void AutonomousPeriodic()
@@ -37,7 +37,7 @@ private:
 		// teleop starts running. If you want the autonomous to 
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-
+		Scheduler::GetInstance()->RemoveAll();
 	}
 
 	void TeleopPeriodic()
