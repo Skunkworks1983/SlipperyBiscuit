@@ -9,7 +9,7 @@ private:
 	Talon *leftMotor1, *leftMotor2, *leftMotor3, *rightMotor1, *rightMotor2,
 			*rightMotor3;
 	DoubleSolenoid *frontOmni, *backOmni;
-	Solenoid *shifterLeft, *shifterRight;
+	DoubleSolenoid *shifter, *shifterRight;
 public:
 	DriveBase();
 	~DriveBase();

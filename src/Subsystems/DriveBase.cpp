@@ -18,8 +18,7 @@ DriveBase::DriveBase() :
 	frontOmni = new DoubleSolenoid(FRONT_OMNI_PORT);
 	backOmni = new DoubleSolenoid(BACK_OMNI_PORT);
 
-	shifterLeft = new Solenoid(SHIFTER_LEFT_PORT);
-	shifterRight = new Solenoid(SHIFTER_RIGHT_PORT);
+	shifter = new DoubleSolenoid(SHIFTER_PORT);
 }
 
 DriveBase::~DriveBase() {
@@ -32,11 +31,12 @@ DriveBase::~DriveBase() {
 
 	delete frontOmni;
 	delete backOmni;
+
+	delete shifter;
 }
 
 void DriveBase::shift(bool high) {
-	shifterLeft->Set(high);
-	shifterRight->Set(high);
+	shifter->Set(high ? DoubleSolenoid::kForward : DoubleSolenoid::kReverse);
 }
 
 void DriveBase::InitDefaultCommand() {

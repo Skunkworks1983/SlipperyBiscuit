@@ -17,8 +17,7 @@
 #define FRONT_OMNI_ID 0
 #define BACK_OMNI_ID 1
 
-#define SHIFTER_LEFT_PORT 4
-#define SHIFTER_RIGHT_PORT 5
+#define SHIFTER_PORT 4, 5
 
 #define COMPRESSOR_PORT 0
 

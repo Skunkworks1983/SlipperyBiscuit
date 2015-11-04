@@ -10,18 +10,18 @@ OI::OI() {
 	leftStick = new Joystick(OI_JOYSTICK_LEFT_PORT);
 	rightStick = new Joystick(OI_JOYSTICK_RIGHT_PORT);
 
-	holdEngage = new JoystickButton(leftStick, 0);
+	holdEngage = new JoystickButton(leftStick, 1);
 
-	engageOmniWheelsOff = new JoystickButton(leftStick, 1);
-	engageOmniWheelsOn = new JoystickButton(leftStick, 2);
+	engageOmniWheelsOff = new JoystickButton(leftStick, 2);
+	engageOmniWheelsOn = new JoystickButton(leftStick, 3);
 
-	toggleFront = new JoystickButton(rightStick, 0);
 	toggleFront = new JoystickButton(rightStick, 1);
+	toggleFront = new JoystickButton(rightStick, 2);
 
-	toggleAll = new JoystickButton(leftStick, 3);
+	toggleAll = new JoystickButton(rightStick, 3);
 
-	shiftUp = new JoystickButton(leftStick, 3);
-	shiftDown = new JoystickButton(leftStick, 4);
+	shiftUp = new JoystickButton(leftStick, 4);
+	shiftDown = new JoystickButton(leftStick, 5);
 
 	registerListeners();
 }
