@@ -10,6 +10,8 @@ private:
 			*rightMotor3;
 	DoubleSolenoid *frontOmni, *backOmni;
 	DoubleSolenoid *shifter, *shifterRight;
+
+	Encoder *leftEncoder, *rightEncoder;
 public:
 	DriveBase();
 	~DriveBase();
@@ -21,6 +23,9 @@ public:
 	void toggleSolenoid(int id);
 	void engageSolenoid(int id, bool on);
 	void shift(bool high);
+	float getLeftEncoderRotation();
+	float getRightEncoderRotation();
+
 };
 
 #endif

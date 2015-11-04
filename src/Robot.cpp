@@ -1,55 +1,45 @@
+#include <CommandBase.h>
 #include <Commands/Scheduler.h>
-#include <Commands/TankDrive.h>
-#include <IterativeRobot.h>
-#include <LiveWindow/LiveWindow.h>
+#include <Robot.h>
 #include <RobotBase.h>
-#include <stddef.h>
+#include <RobotMap.h>
+#include <utilities/Time.h>
 
-class Robot: public IterativeRobot
-{
-private:
-	LiveWindow *lw;
+void Robot::RobotInit() {
+	CommandBase::init();
+	lw = LiveWindow::GetInstance();
+	odom = new Odometry(WHEEL_DIAMETER, AXLE_LENGTH);
+}
 
-	void RobotInit()
-	{
-		CommandBase::init();
-		lw = LiveWindow::GetInstance();
-	}
-	
-	void DisabledPeriodic()
-	{
-		Scheduler::GetInstance()->Run();
-	}
+void Robot::DisabledPeriodic() {
+	Scheduler::GetInstance()->Run();
+}
 
-	void AutonomousInit()
-	{
-		Scheduler::GetInstance()->RemoveAll();
-	}
+void Robot::AutonomousInit() {
+	Scheduler::GetInstance()->RemoveAll();
+}
 
-	void AutonomousPeriodic()
-	{
-		Scheduler::GetInstance()->Run();
-	}
+void Robot::AutonomousPeriodic() {
+	Scheduler::GetInstance()->Run();
+	odom->update(Time::getTime(),
+			CommandBase::drivebase->getLeftEncoderRotation(),
+			CommandBase::drivebase->getRightEncoderRotation());
+}
 
-	void TeleopInit()
-	{
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to 
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		Scheduler::GetInstance()->RemoveAll();
-	}
+void Robot::TeleopInit() {
+	Scheduler::GetInstance()->RemoveAll();
+}
 
-	void TeleopPeriodic()
-	{
-		Scheduler::GetInstance()->Run();
-	}
+void Robot::TeleopPeriodic() {
+	Scheduler::GetInstance()->Run();
+	odom->update(Time::getTime(),
+				CommandBase::drivebase->getLeftEncoderRotation(),
+				CommandBase::drivebase->getRightEncoderRotation());
+}
 
-	void TestPeriodic()
-	{
-		lw->Run();
-	}
-};
+void Robot::TestPeriodic() {
+	lw->Run();
+}
 
 START_ROBOT_CLASS(Robot);
 

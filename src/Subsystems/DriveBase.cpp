@@ -19,6 +19,9 @@ DriveBase::DriveBase() :
 	backOmni = new DoubleSolenoid(BACK_OMNI_PORT);
 
 	shifter = new DoubleSolenoid(SHIFTER_PORT);
+
+	leftEncoder = new Encoder(LEFT_ENCODER_PORTS);
+	rightEncoder = new Encoder(RIGHT_ENCODER_PORTS);
 }
 
 DriveBase::~DriveBase() {
@@ -91,3 +94,10 @@ void DriveBase::toggleSolenoids() {
 	toggleSolenoid(BACK_OMNI_ID);
 }
 
+float DriveBase::getLeftEncoderRotation(){
+	return leftEncoder->GetDistance() / DRIVEBASE_ENCODER_TICKS_PER_REV;
+}
+
+float DriveBase::getRightEncoderRotation(){
+	return rightEncoder->GetDistance() / DRIVEBASE_ENCODER_TICKS_PER_REV;
+}

@@ -1,4 +1,5 @@
-#include "Odometry.h"
+#include <RobotMap.h>
+#include <utilities/Odometry.h>
 
 Odometry::Odometry(float wheel_diameter, float axle_length) :
 		wheel_diameter(wheel_diameter), axle_length(axle_length) {
