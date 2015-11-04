@@ -28,3 +28,4 @@
 *.app
 /Debug/
 Debug/FRCUserProgram
+sysProps.xml
