@@ -20,8 +20,8 @@ public:
 	virtual ~RunCompressor();
 	void Initialize();
 	void Execute();
-	void End();
 	void Interrupted();
+	void End();
 	bool IsFinished();
 };
 
