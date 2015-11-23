@@ -10,6 +10,7 @@
 #include <Subsystems/Pneumatics.h>
 
 RunCompressor::RunCompressor() {
+	Requires(CommandBase::pneumatics);
 	p = CommandBase::pneumatics;
 }
 

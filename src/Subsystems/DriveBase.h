@@ -10,7 +10,7 @@ private:
 			*rightMotor3;
 	DoubleSolenoid *frontOmni, *backOmni;
 	DoubleSolenoid *shifter, *shifterRight;
-
+	double currentAngle;
 	Encoder *leftEncoder, *rightEncoder;
 public:
 	DriveBase();
@@ -25,7 +25,7 @@ public:
 	void shift(bool high);
 	float getLeftEncoderRotation();
 	float getRightEncoderRotation();
-
+	double getCurrentAngle();
 };
 
 #endif

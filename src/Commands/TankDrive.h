@@ -1,5 +1,5 @@
-#ifndef EXAMPLE_COMMAND_H
-#define EXAMPLE_COMMAND_H
+#ifndef TANK_DRIVE_H
+#define TANK_DRIVE_H
 
 #include "../CommandBase.h"
 #include "WPILib.h"

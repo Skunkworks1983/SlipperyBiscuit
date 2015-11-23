@@ -17,6 +17,9 @@ public:
 	~OI();
 	double getLeftStickY();
 	double getRightStickY();
+	double getRightStickX();
+	double getLeftStickX();
+
 };
 
 #endif

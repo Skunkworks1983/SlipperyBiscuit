@@ -13,6 +13,6 @@ public:
 	double getTheta();
 	double getCartesianY();
 	double getCartesianX();
-	Vector *multiply(Vector *v);
-	Vector *add(Vector *v);
+	void multiply(Vector *v);
+	void add(Vector *v);
 };

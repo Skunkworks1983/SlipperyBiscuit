@@ -63,3 +63,12 @@ double OI::getLeftStickY() {
 double OI::getRightStickY() {
 	return rightStick->GetY()*fabs(rightStick->GetY());
 }
+
+double OI::getRightStickX(){
+	return rightStick->GetX()*fabs(rightStick->GetX());
+}
+
+double OI::getLeftStickX(){
+	return leftStick->GetX()*fabs(leftStick->GetX());
+}
+

@@ -1,7 +1,8 @@
+#include <Commands/ArcadeDrive.h>
 #include <Commands/TankDrive.h>
 #include <DoubleSolenoid.h>
+#include <Encoder.h>
 #include <RobotMap.h>
-#include <Solenoid.h>
 #include <Subsystems/DriveBase.h>
 #include <Talon.h>
 
@@ -22,6 +23,7 @@ DriveBase::DriveBase() :
 
 	leftEncoder = new Encoder(LEFT_ENCODER_PORTS);
 	rightEncoder = new Encoder(RIGHT_ENCODER_PORTS);
+	rightEncoder->SetReverseDirection(true);
 }
 
 DriveBase::~DriveBase() {
@@ -38,12 +40,17 @@ DriveBase::~DriveBase() {
 	delete shifter;
 }
 
+double DriveBase::getCurrentAngle(){
+	return currentAngle;
+}
+
 void DriveBase::shift(bool high) {
 	shifter->Set(high ? DoubleSolenoid::kForward : DoubleSolenoid::kReverse);
 }
 
 void DriveBase::InitDefaultCommand() {
-	SetDefaultCommand(new TankDrive());
+	//SetDefaultCommand(new TankDrive());
+	SetDefaultCommand(new ArcadeDrive());
 }
 
 void DriveBase::setLeftSpeed(double speed) {

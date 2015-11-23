@@ -5,10 +5,12 @@
 
 class Odometry{
 private:
+	NetworkTable *data;
 	float wheel_diameter, axle_length;
-	double lastTimeMs, currentTimeMs;
+	double lastTimeMs;
 	double lastEncoderLeft, lastEncoderRight;
 	Vector *currentVelocity, *currentPosition;
+	double lastAngle;
 public:
 	Odometry(float wheel_diameter, float axle_length);
 
@@ -16,5 +18,5 @@ public:
 	double getFieldY();
 	Vector *getFieldPosition();
 	Vector *getCurrentVelocity();
-	void update(double _currentTimeMs, double encoderTickLeft, double encoderTickRight);
+	void update(double currentTimeMs, double encoderTickLeft, double encoderTickRight);
 };

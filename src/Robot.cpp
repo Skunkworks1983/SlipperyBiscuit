@@ -1,14 +1,22 @@
-#include <CommandBase.h>
+#include <Commands/ArcadeDrive.h>
+#include <Commands/MoveForward.h>
 #include <Commands/Scheduler.h>
+#include <Commands/TankDrive.h>
 #include <Robot.h>
 #include <RobotBase.h>
 #include <RobotMap.h>
+#include <SmartDashboard/SmartDashboard.h>
+#include <Subsystems/DriveBase.h>
 #include <utilities/Time.h>
 
 void Robot::RobotInit() {
 	CommandBase::init();
 	lw = LiveWindow::GetInstance();
 	odom = new Odometry(WHEEL_DIAMETER, AXLE_LENGTH);
+	SmartDashboard::PutData("Tank", new TankDrive());
+	SmartDashboard::PutData("Arcade", new ArcadeDrive());
+	SmartDashboard::PutData("MoveForward1", new MoveForward(1, .3));
+	SmartDashboard::PutData("MoveForward-1", new MoveForward(-1, .3));
 }
 
 void Robot::DisabledPeriodic() {
@@ -32,9 +40,11 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
+	SmartDashboard::PutNumber("encoderLeft", CommandBase::drivebase->getLeftEncoderRotation());
+		SmartDashboard::PutNumber("encoderRight", CommandBase::drivebase->getRightEncoderRotation());
 	odom->update(Time::getTime(),
-				CommandBase::drivebase->getLeftEncoderRotation(),
-				CommandBase::drivebase->getRightEncoderRotation());
+			CommandBase::drivebase->getLeftEncoderRotation(),
+			CommandBase::drivebase->getRightEncoderRotation());
 }
 
 void Robot::TestPeriodic() {
