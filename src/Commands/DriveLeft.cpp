@@ -42,7 +42,7 @@ void DriveLeft::End() {
 bool DriveLeft::IsFinished() {
 
 	return drivebase->getLeftDistance() >= distance
-			&& drivebase->getRightDistance() >= distance;
+			&& drivebase->getRightDistance() <= -distance;
 }
 
 

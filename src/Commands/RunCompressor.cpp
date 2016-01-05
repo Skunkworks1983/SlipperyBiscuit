@@ -11,6 +11,7 @@
 
 RunCompressor::RunCompressor() {
 	p = CommandBase::pneumatics;
+	Requires(CommandBase::pneumatics);
 }
 
 RunCompressor::~RunCompressor() {

@@ -41,7 +41,7 @@ void DriveDistance::End() {
 
 bool DriveDistance::IsFinished() {
 
-	return drivebase->getLeftDistance() >= distance
-			&& drivebase->getRightDistance() >= distance;
+	return //drivebase->getLeftDistance() >= distance;
+		 drivebase->getRightDistance() >= distance;
 }
 
